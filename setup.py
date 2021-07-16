@@ -11,10 +11,12 @@ class InstallCommand(install):
         wrapper_path = kernel_path + "/wrapper.sh"
 
         os.makedirs(kernel_path, exist_ok=True)
+        shutil.copyfile("./nesi_tf_kernel/wrapper.sh", wrapper_path)
+
         os.chmod(wrapper_path, 0o750)
         conf_json={
                 "argv": [
-                    f"{kernel_path}/wrapper.sh",
+                    wrapper_path,
                     kernel_name,
                     "python",
                     "-m",
